@@ -3,6 +3,8 @@ package MED.Engine;
 import MED.Graph.MEDGraph;
 import MED.Graph.MEDVertex;
 import MED.Graph.MEDEdge;
+
+//Required package, check http://www.java2s.com/Code/Java/2D-Graphics-GUI/AnimatedGifEncoder.htm
 import java2s.AnimatedGifEncoder;
 
 import java.awt.*;
