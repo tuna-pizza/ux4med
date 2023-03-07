@@ -16,14 +16,26 @@ import java.util.Iterator;
 
 public class MEDDrawer
 {
-    private MEDGraph graph;
-    private MEDEngine engine;
-    private String pathToFile;
+    private final MEDGraph graph;
+    private final MEDEngine engine;
+    private final String pathToFile;
+    private int edgeWidth;
+    private int vertexRadius;
     public MEDDrawer(MEDGraph graph, String pathToFile)
     {
         this.graph = graph;
         this.pathToFile = pathToFile;
         this.engine = new MEDEngine();
+        this.edgeWidth = 2;
+        this.vertexRadius = 3;
+    }
+    public void setEdgeWidth(int edgeWidth)
+    {
+        this.edgeWidth = edgeWidth;
+    }
+    public void setVertexRadius(int vertexRadius)
+    {
+        this.vertexRadius = vertexRadius;
     }
     public boolean draw(double time, int fps, int width, int height)
     {
@@ -52,7 +64,7 @@ public class MEDDrawer
         Graphics2D frameDrawing = frameImage.createGraphics();
         frameDrawing.setBackground(Color.WHITE);
         frameDrawing.fillRect(0, 0, width, height);
-        BasicStroke bs = new BasicStroke(2);
+        BasicStroke bs = new BasicStroke(edgeWidth);
         frameDrawing.setStroke(bs);
         Iterator<MEDEdge> edge_it = graph.getEdges();
         while (edge_it.hasNext())
@@ -86,7 +98,8 @@ public class MEDDrawer
         Point2D.Double pos = new Point2D.Double(v.getX(),v.getY());
         frameDrawing.setColor(Color.decode(v.getColor()));
         frameDrawing.setBackground(Color.decode(v.getColor()));
-        Ellipse2D.Double vertex = new Ellipse2D.Double(pos.getX()-3,pos.getY()-3,6,6);
+        Ellipse2D.Double vertex = new Ellipse2D.Double(pos.getX()-vertexRadius,pos.getY()-vertexRadius,2*vertexRadius,2*vertexRadius);
         frameDrawing.draw(vertex);
+        frameDrawing.fill(vertex);
     }
 }

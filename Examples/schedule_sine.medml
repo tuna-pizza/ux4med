@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+    <graph edgedefault="undirected" id="G">
+        <node id="VV6" x="76.2" y="323.7"/>
+        <node id="VV7" x="25.0" y="200.0"/>
+        <node id="VV8" x="76.2" y="76.2"/>
+        <node id="VV1" x="200.0" y="25.0"/>
+        <node id="VV2" x="323.7" y="76.2"/>
+        <node id="VV3" x="375.0" y="200.0"/>
+        <node id="VV4" x="323.7" y="323.7"/>
+        <node id="VV5" x="200.0" y="375.0"/>
+        <edge id="E0" minLength="0.25" source="VV7" target="VV8">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E1" minLength="0.25" source="VV3" target="VV8">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="909.3842328380582"/>
+        </edge>
+        <edge id="E2" minLength="0.25" source="VV6" target="VV7">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E3" minLength="0.25" source="VV1" target="VV2">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E4" minLength="0.25" source="VV4" target="VV5">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E5" minLength="0.25" source="VV2" target="VV6">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="1380.8265961978252"/>
+        </edge>
+        <edge id="E6" minLength="0.25" source="VV5" target="VV6">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E7" minLength="0.25" source="VV5" target="VV7">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E8" minLength="0.25" source="VV3" target="VV7">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="379.8858487688168"/>
+        </edge>
+        <edge id="E9" minLength="0.25" source="VV2" target="VV7">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="1370.863423808326"/>
+        </edge>
+        <edge id="E10" minLength="0.25" source="VV1" target="VV5">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="1842.4366946406608"/>
+        </edge>
+        <edge id="E11" minLength="0.25" source="VV5" target="VV8">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="1912.4970790601224"/>
+        </edge>
+        <edge id="E12" minLength="0.25" source="VV2" target="VV8">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E13" minLength="0.25" source="VV3" target="VV6">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="448.00324618904233"/>
+        </edge>
+        <edge id="E14" minLength="0.25" source="VV2" target="VV4">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E15" minLength="0.25" source="VV1" target="VV7">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="461.4976016904178"/>
+        </edge>
+        <edge id="E16" minLength="0.25" source="VV1" target="VV6">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="2325.634125899259"/>
+        </edge>
+        <edge id="E17" minLength="0.25" source="VV1" target="VV3">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="461.6400448612685"/>
+        </edge>
+        <edge id="E18" minLength="0.25" source="VV4" target="VV8">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="2797.03190488464"/>
+        </edge>
+        <edge id="E19" minLength="0.25" source="VV4" target="VV6">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="461.41974242749865"/>
+        </edge>
+        <edge id="E20" minLength="0.25" source="VV3" target="VV4">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E21" minLength="0.25" source="VV2" target="VV5">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="1451.1125642514835"/>
+        </edge>
+        <edge id="E22" minLength="0.25" source="VV1" target="VV4">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="1912.6031156226531"/>
+        </edge>
+        <edge id="E23" minLength="0.25" source="VV2" target="VV3">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E24" minLength="0.25" source="VV3" target="VV5">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="923.0007819619107"/>
+        </edge>
+        <edge id="E25" minLength="0.25" source="VV1" target="VV8">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E26" minLength="0.25" source="VV4" target="VV7">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E27" minLength="0.25" source="VV6" target="VV8">
+            <animation fullLengthTime="100.0" morphType="SINE" period="3422.0586899156515" speed="0.5" startTime="922.976263503773"/>
+        </edge>
+    </graph>
+</graphml>

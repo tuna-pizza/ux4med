@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+    <graph edgedefault="undirected" id="G">
+        <node id="V1" x="200.0" y="25.0"/>
+        <node id="V2" x="323.7" y="76.2"/>
+        <node id="V3" x="375.0" y="200.0"/>
+        <node id="V4" x="323.7" y="323.7"/>
+        <node id="V5" x="200.0" y="375.0"/>
+        <node id="V6" x="76.2" y="323.7"/>
+        <node id="V7" x="25.0" y="200.0"/>
+        <node id="V8" x="76.2" y="76.2"/>
+        <edge id="E0" minLength="0.25" source="V3" target="V7"/>
+        <edge id="E1" minLength="0.25" source="V1" target="V8"/>
+        <edge id="E2" minLength="0.25" source="V6" target="V7"/>
+        <edge id="E3" minLength="0.25" source="V1" target="V5"/>
+        <edge id="E4" minLength="0.25" source="V4" target="V7"/>
+        <edge id="E5" minLength="0.25" source="V2" target="V6"/>
+        <edge id="E6" minLength="0.25" source="V5" target="V6"/>
+        <edge id="E7" minLength="0.25" source="V2" target="V4"/>
+        <edge id="E8" minLength="0.25" source="V5" target="V7"/>
+        <edge id="E9" minLength="0.25" source="V7" target="V8"/>
+        <edge id="E10" minLength="0.25" source="V5" target="V8"/>
+        <edge id="E11" minLength="0.25" source="V4" target="V5"/>
+        <edge id="E12" minLength="0.25" source="V2" target="V8"/>
+        <edge id="E13" minLength="0.25" source="V1" target="V7"/>
+        <edge id="E14" minLength="0.25" source="V2" target="V5"/>
+        <edge id="E15" minLength="0.25" source="V4" target="V6"/>
+        <edge id="E16" minLength="0.25" source="V2" target="V3"/>
+        <edge id="E17" minLength="0.25" source="V3" target="V6"/>
+        <edge id="E18" minLength="0.25" source="V1" target="V3"/>
+        <edge id="E19" minLength="0.25" source="V1" target="V4"/>
+        <edge id="E20" minLength="0.25" source="V3" target="V5"/>
+        <edge id="E21" minLength="0.25" source="V2" target="V7"/>
+        <edge id="E22" minLength="0.25" source="V1" target="V6"/>
+        <edge id="E23" minLength="0.25" source="V3" target="V4"/>
+        <edge id="E24" minLength="0.25" source="V4" target="V8"/>
+        <edge id="E25" minLength="0.25" source="V6" target="V8"/>
+        <edge id="E26" minLength="0.25" source="V1" target="V2"/>
+        <edge id="E27" minLength="0.25" source="V3" target="V8"/>
+    </graph>
+</graphml>

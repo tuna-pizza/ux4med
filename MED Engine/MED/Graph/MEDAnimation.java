@@ -2,19 +2,25 @@ package MED.Graph;
 
 public class MEDAnimation
 {
-    public enum MorphType{COMPLETE, PED, LINEAR, SINE, INVERSESINE, COSINE, NONE};
+    public enum MorphType{COMPLETE, PED, LINEAR, SINE, INVERSESINE, COSINE, NONE}
     private double start_time;
     private double speed;
     private double fullLengthTime;
     private double period;
     private MorphType morphType;
 
-    public MEDAnimation(double start_time,double speed,double fullLengthTime,double period,String morph_type)
+    public MEDAnimation(double start_time,double speed,double fullLengthTime,double period,MorphType morph_type)
     {
         this.start_time = start_time;
         this.speed = speed;
         this.fullLengthTime = fullLengthTime;
         this.period = period;
+        this.morphType = morph_type;
+    }
+    public MEDAnimation(double start_time,double speed,double fullLengthTime,double period,String morph_type)
+    {
+
+        this(start_time,speed,fullLengthTime,period,MorphType.NONE);
         switch (morph_type)
         {
             case "COMPLETE":
@@ -52,7 +58,6 @@ public class MEDAnimation
                 this.morphType = MorphType.NONE;
             }
         }
-
     }
     public double getStartTime()
     {

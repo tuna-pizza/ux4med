@@ -46,7 +46,7 @@ public class MEDEngine
             return start;
         }
     }
-    private Coordinate computeMidPosition(MEDEdge e)
+    public Coordinate computeMidPosition(MEDEdge e)
     {
         double x1 = e.getV1().getX();
         double y1 = e.getV1().getY();
@@ -56,7 +56,7 @@ public class MEDEngine
         double midY = (y1+y2)/2;
         return new Coordinate(midX,midY);
     }
-    private Coordinate computeStartPosition1(MEDEdge e)
+    public Coordinate computeStartPosition1(MEDEdge e)
     {
         double x1 = e.getV1().getX();
         double y1 = e.getV1().getY();
@@ -65,7 +65,7 @@ public class MEDEngine
         double startY1 = y1 + (mid.getY()-y1)*e.getMinLength();
         return new Coordinate(startX1,startY1);
     }
-    private Coordinate computeStartPosition2(MEDEdge e)
+    public Coordinate computeStartPosition2(MEDEdge e)
     {
         double x2 = e.getV2().getX();
         double y2 = e.getV2().getY();
@@ -99,12 +99,20 @@ public class MEDEngine
             return (getStubExtensionLengthRatio(e,a,time)>0);
         }
     }
-    private double getStubExtensionLengthRatio(MEDEdge e, MEDAnimation a, long time)
+    private double getMorphDuration(MEDEdge e, MEDAnimation a)
     {
         Coordinate mid = computeMidPosition(e);
         Coordinate start = computeStartPosition1(e);
-        double morphDuration = Math.sqrt(Math.pow(mid.getX()-start.getX(),2)+Math.pow(mid.getY()-start.getY(),2))/a.getSpeed();
-        double totalDuration = 2*morphDuration + a.getFullLengthTime();
+        return Math.sqrt(Math.pow(mid.getX()-start.getX(),2)+Math.pow(mid.getY()-start.getY(),2))/a.getSpeed();
+    }
+    public double getTotalDuration(MEDEdge e, MEDAnimation a)
+    {
+        return 2*getMorphDuration(e,a) + a.getFullLengthTime();
+    }
+    private double getStubExtensionLengthRatio(MEDEdge e, MEDAnimation a, long time)
+    {
+        double morphDuration = getMorphDuration(e,a);
+        double totalDuration = getTotalDuration(e,a);
         if (a.getMorphType().equals(MEDAnimation.MorphType.COMPLETE))
         {
             return 1;

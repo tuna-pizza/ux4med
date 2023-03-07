@@ -2,18 +2,18 @@ package MED.Engine;
 
 public class Coordinate
 {
-    private double x;
-    private double y;
-    Coordinate(double x, double y)
+    private final double x;
+    private final double y;
+    public Coordinate(double x, double y)
     {
         this.x = x;
         this.y = y;
     }
-    double getX()
+    public double getX()
     {
         return x;
     }
-    double getY()
+    public double getY()
     {
         return y;
     }

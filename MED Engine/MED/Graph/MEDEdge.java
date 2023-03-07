@@ -5,16 +5,16 @@ import java.util.Iterator;
 
 public class MEDEdge
 {
-    private MEDVertex v1;
-    private MEDVertex v2;
-    private double minLength;
-    private HashSet<MEDAnimation> animations;
+    private final MEDVertex v1;
+    private final MEDVertex v2;
+    private final double minLength;
+    private final HashSet<MEDAnimation> animations;
     public MEDEdge(MEDVertex v1,MEDVertex v2,double minLength)
     {
         this.v1 = v1;
         this.v2 = v2;
         this.minLength = minLength;
-        this.animations = new HashSet<MEDAnimation>();
+        this.animations = new HashSet<>();
 
     }
     public void addAnimation(MEDAnimation animation)

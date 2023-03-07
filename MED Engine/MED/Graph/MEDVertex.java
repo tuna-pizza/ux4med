@@ -2,10 +2,10 @@ package MED.Graph;
 
 public class MEDVertex
 {
-    private String id;
-    private double x;
-    private double y;
-    private String color;
+    private final String id;
+    private final double x;
+    private final double y;
+    private final String color;
 
     public MEDVertex(String id,double x,double y)
     {

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+    <graph edgedefault="undirected" id="G">
+        <node id="VV6" x="76.2" y="323.7"/>
+        <node id="VV7" x="25.0" y="200.0"/>
+        <node id="VV8" x="76.2" y="76.2"/>
+        <node id="VV1" x="200.0" y="25.0"/>
+        <node id="VV2" x="323.7" y="76.2"/>
+        <node id="VV3" x="375.0" y="200.0"/>
+        <node id="VV4" x="323.7" y="323.7"/>
+        <node id="VV5" x="200.0" y="375.0"/>
+        <edge id="E0" minLength="0.25" source="VV7" target="VV8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E1" minLength="0.25" source="VV3" target="VV8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="802.8445876843036"/>
+        </edge>
+        <edge id="E2" minLength="0.25" source="VV6" target="VV7">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E3" minLength="0.25" source="VV1" target="VV2">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E4" minLength="0.25" source="VV4" target="VV5">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E5" minLength="0.25" source="VV2" target="VV6">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="1183.2586590230228"/>
+        </edge>
+        <edge id="E6" minLength="0.25" source="VV5" target="VV6">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E7" minLength="0.25" source="VV5" target="VV7">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E8" minLength="0.25" source="VV3" target="VV7">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="2367.3172685275154"/>
+        </edge>
+        <edge id="E9" minLength="0.25" source="VV2" target="VV7">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="1207.8978193713403"/>
+        </edge>
+        <edge id="E10" minLength="0.25" source="VV1" target="VV5">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="1588.4956404273958"/>
+        </edge>
+        <edge id="E11" minLength="0.25" source="VV5" target="VV8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="1675.6979084494974"/>
+        </edge>
+        <edge id="E12" minLength="0.25" source="VV2" target="VV8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E13" minLength="0.25" source="VV3" target="VV6">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="398.00395278448786"/>
+        </edge>
+        <edge id="E14" minLength="0.25" source="VV2" target="VV4">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E15" minLength="0.25" source="VV1" target="VV7">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="404.9813745668179"/>
+        </edge>
+        <edge id="E16" minLength="0.25" source="VV1" target="VV6">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="1986.71944747146"/>
+        </edge>
+        <edge id="E17" minLength="0.25" source="VV1" target="VV3">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="405.18137456681796"/>
+        </edge>
+        <edge id="E18" minLength="0.25" source="VV4" target="VV8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="2567.445297368247"/>
+        </edge>
+        <edge id="E19" minLength="0.25" source="VV4" target="VV6">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="404.8795919772808"/>
+        </edge>
+        <edge id="E20" minLength="0.25" source="VV3" target="VV4">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E21" minLength="0.25" source="VV2" target="VV5">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="1270.7202667227077"/>
+        </edge>
+        <edge id="E22" minLength="0.25" source="VV1" target="VV4">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="1675.8500406812225"/>
+        </edge>
+        <edge id="E23" minLength="0.25" source="VV2" target="VV3">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E24" minLength="0.25" source="VV3" target="VV5">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="809.9781238316242"/>
+        </edge>
+        <edge id="E25" minLength="0.25" source="VV1" target="VV8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E26" minLength="0.25" source="VV4" target="VV7">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="0.0"/>
+        </edge>
+        <edge id="E27" minLength="0.25" source="VV6" target="VV8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="3192.4720823992584" speed="0.5" startTime="809.9438092565733"/>
+        </edge>
+    </graph>
+</graphml>

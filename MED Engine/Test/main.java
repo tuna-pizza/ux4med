@@ -1,19 +1,27 @@
 package Test;
 
+import MED.Algorithm.GreedyScheduler;
 import MED.Engine.MEDDrawer;
 import MED.Graph.MEDGraph;
 import MED.Graph.MEDVertex;
 import MED.Graph.MEDEdge;
 import MED.Graph.MEDAnimation;
+import MED.IO.MEDmlReader;
+import MED.IO.MEDmlWriter;
 
 public class main
 {
     public static void main (String[] args)
     {
         double speed=8;
-        MEDGraph g = example2("COSINE",speed);
-        MEDDrawer d = new MEDDrawer(g,"C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\1.gif");
-        d.draw(20000/speed,60,400,400);
+        MEDmlReader r = new MEDmlReader("C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\clean.medml");
+        MEDGraph g = r.read();
+        GreedyScheduler s = new GreedyScheduler(0.5,100,100, MEDAnimation.MorphType.COSINE);
+        s.schedule(g);
+        MEDDrawer d = new MEDDrawer(g,"C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\schedule_cosine.gif");
+        d.draw(g.getLastEnd()-g.getFirstStart(),60,(int)((g.getMaxX()-g.getMinX())+50),(int)((g.getMaxY()-g.getMinY())+50));
+        MEDmlWriter w = new MEDmlWriter("C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\schedule_cosine.medml");
+        w.write(g);
     }
 
     static MEDGraph example2 (String style, double speed)
@@ -70,7 +78,7 @@ public class main
         MEDEdge e27 = new MEDEdge(v6,v8,0.25);
 
         MEDEdge e28 = new MEDEdge(v7,v8,0.25);
-        MEDAnimation a1 = new MEDAnimation(0,0.05*speed,100,20000/speed,style);
+        /*MEDAnimation a1 = new MEDAnimation(0,0.05*speed,100,20000/speed,style);
         MEDAnimation a2 = new MEDAnimation(2000/speed,0.05*speed,100,20000/speed,style);
         MEDAnimation a3 = new MEDAnimation(4000/speed,0.05*speed,100,20000/speed,style);
         MEDAnimation a4 = new MEDAnimation(6000/speed,0.05*speed,100,20000/speed,style);
@@ -104,7 +112,7 @@ public class main
         e25.addAnimation(a2);
         e26.addAnimation(a6);
         e27.addAnimation(a6);
-        e28.addAnimation(a4);
+        e28.addAnimation(a4);*/
         graph.addEdge(e1);
         graph.addEdge(e2);
         graph.addEdge(e3);
