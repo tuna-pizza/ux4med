@@ -1,5 +1,6 @@
 package MED.Engine;
 
+import MED.Data.Coordinate;
 import MED.Graph.MEDAnimation;
 import MED.Graph.MEDEdge;
 
@@ -81,6 +82,10 @@ public class MEDEngine
         while (a_it.hasNext())
         {
             MEDAnimation nextA = a_it.next();
+            if (nextA.getMorphType().equals(MEDAnimation.MorphType.COMPLETE))
+            {
+                return nextA;
+            }
             if (isActive(e, nextA, time) || (a == null))
             {
                 a = nextA;

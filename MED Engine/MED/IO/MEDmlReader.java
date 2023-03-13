@@ -14,9 +14,12 @@ import org.xml.sax.*;
 public class MEDmlReader
 {
     private final String file;
-    public MEDmlReader(String file)
+    public enum InputType {MEDml, yEd};
+    private InputType inputType;
+    public MEDmlReader(String file, InputType inputType)
     {
         this.file = file;
+        this.inputType = inputType;
     }
     public MEDGraph read()
     {
@@ -66,7 +69,7 @@ public class MEDmlReader
                 NamedNodeMap edgeAttributes = edge.getAttributes();
                 String sourceID = edgeAttributes.getNamedItem("source").getTextContent();
                 String targetID = edgeAttributes.getNamedItem("target").getTextContent();
-                double minLength = 0.25;
+                double minLength = 0.5;
                 if (edgeAttributes.getNamedItem("minLength") != null)
                 {
                     minLength = Double.parseDouble(edgeAttributes.getNamedItem("minLength").getTextContent());
@@ -128,6 +131,43 @@ public class MEDmlReader
                 NamedNodeMap vertexAttributes = vertex.getAttributes();
                 String id = vertexAttributes.getNamedItem("id").getTextContent();
                 double x,y;
+                if (inputType == InputType.yEd)
+                {
+                    Node data = vertex.getFirstChild();
+                    while (data != null)
+                    {
+                        if (data.getNodeName().equals("data"))
+                        {
+                            NamedNodeMap dataAttributes = data.getAttributes();
+                            if (dataAttributes.getNamedItem("key") != null)
+                            {
+                                if (dataAttributes.getNamedItem("key").getTextContent().equals("d6"))
+                                {
+                                    Node yShapeNode = data.getFirstChild();
+                                    while (yShapeNode != null)
+                                    {
+                                        if (yShapeNode.getNodeName().equals("y:ShapeNode"))
+                                        {
+                                            Node yGeometry = yShapeNode.getFirstChild();
+                                            while (yGeometry != null) {
+                                                if (yGeometry.getNodeName().equals("y:Geometry"))
+                                                {
+                                                    vertexAttributes = yGeometry.getAttributes();
+                                                    break;
+                                                }
+                                                yGeometry = yGeometry.getNextSibling();
+                                            }
+                                            break;
+                                        }
+                                        yShapeNode = yShapeNode.getNextSibling();
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        data = data.getNextSibling();
+                    }
+                }
                 if (vertexAttributes.getNamedItem("x") != null)
                 {
                     x = Double.parseDouble(vertexAttributes.getNamedItem("x").getTextContent());
@@ -144,7 +184,7 @@ public class MEDmlReader
                 {
                     y = 0;
                 }
-                g.addVertex(new MEDVertex(id,x,y));
+                g.addVertex(new MEDVertex(id, x, y));
             }
             vertex = vertex.getNextSibling();
         }

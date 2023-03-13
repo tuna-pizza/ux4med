@@ -9,7 +9,7 @@ public class MEDAnimation
     private double period;
     private MorphType morphType;
 
-    public MEDAnimation(double start_time,double speed,double fullLengthTime,double period,MorphType morph_type)
+    public MEDAnimation(double start_time,double speed,double fullLengthTime, double period,MorphType morph_type)
     {
         this.start_time = start_time;
         this.speed = speed;

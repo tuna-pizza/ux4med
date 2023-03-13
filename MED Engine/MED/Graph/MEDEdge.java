@@ -8,7 +8,7 @@ public class MEDEdge
     private final MEDVertex v1;
     private final MEDVertex v2;
     private final double minLength;
-    private final HashSet<MEDAnimation> animations;
+    private HashSet<MEDAnimation> animations;
     public MEDEdge(MEDVertex v1,MEDVertex v2,double minLength)
     {
         this.v1 = v1;
@@ -36,5 +36,9 @@ public class MEDEdge
     public Iterator<MEDAnimation> getAnimations()
     {
         return this.animations.iterator();
+    }
+    protected void clearAnimations()
+    {
+        this.animations = new HashSet<>();
     }
 }

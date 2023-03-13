@@ -1,6 +1,8 @@
 package Test;
 
 import MED.Algorithm.GreedyScheduler;
+import MED.Algorithm.Scheduler;
+import MED.Algorithm.SingleVertexScheduler;
 import MED.Engine.MEDDrawer;
 import MED.Graph.MEDGraph;
 import MED.Graph.MEDVertex;
@@ -8,22 +10,55 @@ import MED.Graph.MEDEdge;
 import MED.Graph.MEDAnimation;
 import MED.IO.MEDmlReader;
 import MED.IO.MEDmlWriter;
+import com.yworks.yfiles.graph.IGraph;
+import com.yworks.yfiles.graphml.GraphMLIOHandler;
+import com.yworks.yfiles.view.GraphComponent;
+
+import java.io.File;
+import java.io.IOException;
 
 public class main
 {
     public static void main (String[] args)
     {
-        double speed=8;
-        MEDmlReader r = new MEDmlReader("C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\clean.medml");
+        double speed = 0.25;
+        double fullLengthTime = 100;
+        double crossingDelay = 50;
+        MEDAnimation.MorphType morphType = MEDAnimation.MorphType.COSINE;
+        MEDmlReader r = new MEDmlReader("C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\circular.graphml", MEDmlReader.InputType.yEd);
         MEDGraph g = r.read();
-        GreedyScheduler s = new GreedyScheduler(0.5,100,100, MEDAnimation.MorphType.COSINE);
+        //GraphComponent c = new GraphComponent();
+        //IGraph graph = load("C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\test.graphml",c);
+        //yFilesConverter conv = new yFilesConverter(0.5);
+        //MEDGraph g = conv.convertToMED(graph,c);
+        System.out.println("Finished reading!");
+        //g.normalize(100);
+        Scheduler s = new SingleVertexScheduler(speed,fullLengthTime,crossingDelay,morphType);
         s.schedule(g);
-        MEDDrawer d = new MEDDrawer(g,"C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\schedule_cosine.gif");
-        d.draw(g.getLastEnd()-g.getFirstStart(),60,(int)((g.getMaxX()-g.getMinX())+50),(int)((g.getMaxY()-g.getMinY())+50));
-        MEDmlWriter w = new MEDmlWriter("C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\schedule_cosine.medml");
+        System.out.println("Finished scheduling!");
+        MEDDrawer d = new MEDDrawer(g,"C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\ex1.mpeg");
+        d.setEdgeWidth(3);
+        d.setVertexRadius(8);
+        d.draw(g.getLastEnd()-g.getFirstStart(),30,(int)((g.getMaxX()-g.getMinX())),(int)(g.getMaxY()-g.getMinY()), MEDDrawer.Mode.MPEG);
+        MEDmlWriter w = new MEDmlWriter("C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\ex6.medml");
         w.write(g);
     }
 
+    static IGraph load(String file,GraphComponent graphComponent)
+    {
+        try
+        {
+            File in = new File(file);
+            GraphMLIOHandler io = new GraphMLIOHandler();
+            graphComponent.setGraphMLIOHandler(io);
+            graphComponent.setFileIOEnabled(true);
+            graphComponent.importFromGraphML(in.toURI().toURL());
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return graphComponent.getGraph();
+    }
     static MEDGraph example2 (String style, double speed)
     {
         MEDGraph graph = new MEDGraph();

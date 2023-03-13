@@ -50,7 +50,7 @@ public class MEDmlWriter
             {
                 MEDVertex v = v_it.next();
                 Element vertex = document.createElement("node");
-                vertex.setAttribute("id","V"+v.getID());
+                vertex.setAttribute("id",v.getID());
                 vertex.setAttribute("x",Double.toString(v.getX()));
                 vertex.setAttribute("y",Double.toString(v.getY()));
                 graph.appendChild(vertex);
@@ -62,8 +62,8 @@ public class MEDmlWriter
                 MEDEdge e = e_it.next();
                 Element edge = document.createElement("edge");
                 edge.setAttribute("id","E"+edgeID++);
-                edge.setAttribute("source","V"+e.getV1().getID());
-                edge.setAttribute("target","V"+e.getV2().getID());
+                edge.setAttribute("source",e.getV1().getID());
+                edge.setAttribute("target",e.getV2().getID());
                 edge.setAttribute("minLength",Double.toString(e.getMinLength()));
                 Iterator<MEDAnimation> a_it = e.getAnimations();
                 while (a_it.hasNext())
