@@ -14,7 +14,7 @@ import org.xml.sax.*;
 public class MEDmlReader
 {
     private final String file;
-    public enum InputType {MEDml, yEd};
+    public enum InputType {MEDml, yEdOld, yEdNew};
     private InputType inputType;
     public MEDmlReader(String file, InputType inputType)
     {
@@ -131,7 +131,7 @@ public class MEDmlReader
                 NamedNodeMap vertexAttributes = vertex.getAttributes();
                 String id = vertexAttributes.getNamedItem("id").getTextContent();
                 double x,y;
-                if (inputType == InputType.yEd)
+                if (inputType == InputType.yEdOld)
                 {
                     Node data = vertex.getFirstChild();
                     while (data != null)
@@ -147,6 +147,43 @@ public class MEDmlReader
                                     while (yShapeNode != null)
                                     {
                                         if (yShapeNode.getNodeName().equals("y:ShapeNode"))
+                                        {
+                                            Node yGeometry = yShapeNode.getFirstChild();
+                                            while (yGeometry != null) {
+                                                if (yGeometry.getNodeName().equals("y:Geometry"))
+                                                {
+                                                    vertexAttributes = yGeometry.getAttributes();
+                                                    break;
+                                                }
+                                                yGeometry = yGeometry.getNextSibling();
+                                            }
+                                            break;
+                                        }
+                                        yShapeNode = yShapeNode.getNextSibling();
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        data = data.getNextSibling();
+                    }
+                }
+                if (inputType == InputType.yEdNew)
+                {
+                    Node data = vertex.getFirstChild();
+                    while (data != null)
+                    {
+                        if (data.getNodeName().equals("data"))
+                        {
+                            NamedNodeMap dataAttributes = data.getAttributes();
+                            if (dataAttributes.getNamedItem("key") != null)
+                            {
+                                if (dataAttributes.getNamedItem("key").getTextContent().equals("d5"))
+                                {
+                                    Node yShapeNode = data.getFirstChild();
+                                    while (yShapeNode != null)
+                                    {
+                                        if (yShapeNode.getNodeName().equals("y:SVGNode"))
                                         {
                                             Node yGeometry = yShapeNode.getFirstChild();
                                             while (yGeometry != null) {

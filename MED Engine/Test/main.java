@@ -1,8 +1,7 @@
 package Test;
 
-import MED.Algorithm.GreedyScheduler;
+import MED.Algorithm.GreedyEdgeScheduler;
 import MED.Algorithm.Scheduler;
-import MED.Algorithm.SingleVertexScheduler;
 import MED.Engine.MEDDrawer;
 import MED.Graph.MEDGraph;
 import MED.Graph.MEDVertex;
@@ -21,26 +20,27 @@ public class main
 {
     public static void main (String[] args)
     {
-        double speed = 0.25;
+        double speed = 0.15;
         double fullLengthTime = 100;
         double crossingDelay = 50;
         MEDAnimation.MorphType morphType = MEDAnimation.MorphType.COSINE;
-        MEDmlReader r = new MEDmlReader("C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\circular.graphml", MEDmlReader.InputType.yEd);
+        MEDmlReader r = new MEDmlReader("/home/foersth/Dokumente/MED/Examples/perugia.graphml", MEDmlReader.InputType.yEdNew);
         MEDGraph g = r.read();
-        //GraphComponent c = new GraphComponent();
-        //IGraph graph = load("C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\test.graphml",c);
-        //yFilesConverter conv = new yFilesConverter(0.5);
-        //MEDGraph g = conv.convertToMED(graph,c);
+        /*GraphComponent c = new GraphComponent();
+        IGraph graph = load("/home/foersth/Dokumente/MED/Examples/perugia.graphml",c);
+        yFilesConverter conv = new yFilesConverter(0.5);
+        MEDGraph g = conv.convertToMED(graph,c);*/
         System.out.println("Finished reading!");
-        //g.normalize(100);
-        Scheduler s = new SingleVertexScheduler(speed,fullLengthTime,crossingDelay,morphType);
+        g.normalize(100);
+        Scheduler s = new GreedyEdgeScheduler(speed,fullLengthTime,crossingDelay,morphType);
         s.schedule(g);
         System.out.println("Finished scheduling!");
-        MEDDrawer d = new MEDDrawer(g,"C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\ex1.mpeg");
-        d.setEdgeWidth(3);
+        System.out.println("Total Time: " + (g.getLastEnd()-g.getFirstStart()));
+        MEDDrawer d = new MEDDrawer(g,"/home/foersth/Dokumente/MED/Examples/perugia2.mp4");
+        d.setEdgeWidth(2);
         d.setVertexRadius(8);
         d.draw(g.getLastEnd()-g.getFirstStart(),30,(int)((g.getMaxX()-g.getMinX())),(int)(g.getMaxY()-g.getMinY()), MEDDrawer.Mode.MPEG);
-        MEDmlWriter w = new MEDmlWriter("C:\\Users\\Henry Förster\\Documents\\MED\\Examples\\ex6.medml");
+        MEDmlWriter w = new MEDmlWriter("/home/foersth/Dokumente/MED/Examples/perugia.medml");
         w.write(g);
     }
 

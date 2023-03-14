@@ -7,13 +7,22 @@ import MED.Graph.MEDEdge;
 
 //Required package, check http://www.java2s.com/Code/Java/2D-Graphics-GUI/AnimatedGifEncoder.htm
 import java2s.AnimatedGifEncoder;
+//Required package, import jcodec and jcodec.javase via maven
+import org.jcodec.common.io.ByteBufferSeekableByteChannel;
+import org.jcodec.common.model.Rational;
+import org.jcodec.common.io.NIOUtils;
+import org.jcodec.common.io.SeekableByteChannel;
+import org.jcodec.api.awt.AWTSequenceEncoder;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 public class MEDDrawer
 {
@@ -69,7 +78,32 @@ public class MEDDrawer
     }
     private boolean drawMpeg(double time, int fps, int width, int height)
     {
-        return false;
+        SeekableByteChannel out = null;
+        try
+        {
+            out = NIOUtils.writableFileChannel(pathToFile);
+            // for Android use: AndroidSequenceEncoder
+            AWTSequenceEncoder encoder = new AWTSequenceEncoder(out, Rational.R(fps, 1));
+            double frameTime = 1000.0/fps;
+            double currentFrame = 0;
+            do
+            {
+                BufferedImage frameImage = new BufferedImage(width+width%2+2*margin,height+height%2+2*margin,BufferedImage.TYPE_3BYTE_BGR);
+                drawFrame(frameImage,width+width%2+2*margin,height+height%2+2*margin,(long)currentFrame);
+                encoder.encodeImage(frameImage);
+                currentFrame += frameTime;
+            }
+            while(currentFrame<time);
+            encoder.finish();
+        }
+        catch (Exception e)
+        {
+            System.err.println(e.getMessage());
+            NIOUtils.closeQuietly(out);
+            return false;
+        }
+        NIOUtils.closeQuietly(out);
+        return true;
     }
     private boolean drawGif(double time, int fps, int width, int height)
     {
@@ -98,6 +132,7 @@ public class MEDDrawer
         Graphics2D frameDrawing = frameImage.createGraphics();
         frameDrawing.setBackground(Color.WHITE);
         frameDrawing.fillRect(0, 0, width, height);
+        frameDrawing.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         BasicStroke bs = new BasicStroke(edgeWidth);
         frameDrawing.setStroke(bs);
         Iterator<MEDEdge> edge_it = graph.getEdges();
