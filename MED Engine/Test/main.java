@@ -7,7 +7,10 @@ import MED.Graph.MEDGraph;
 import MED.Graph.MEDVertex;
 import MED.Graph.MEDEdge;
 import MED.Graph.MEDAnimation;
+import MED.IO.BoardgameReader;
+import MED.IO.JSONReader;
 import MED.IO.MEDmlReader;
+import MED.IO.CSVReader;
 import MED.IO.MEDmlWriter;
 import com.yworks.yfiles.graph.IGraph;
 import com.yworks.yfiles.graphml.GraphMLIOHandler;
@@ -23,25 +26,26 @@ public class main
         double speed = 0.15;
         double fullLengthTime = 100;
         double crossingDelay = 50;
-        MEDAnimation.MorphType morphType = MEDAnimation.MorphType.COSINE;
-        MEDmlReader r = new MEDmlReader("/home/foersth/Dokumente/MED/Examples/perugia.graphml", MEDmlReader.InputType.yEdNew);
+        /*CSVReader r = new CSVReader("/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop_nodes.csv","/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop_edges.csv",0.5);
         MEDGraph g = r.read();
-        /*GraphComponent c = new GraphComponent();
-        IGraph graph = load("/home/foersth/Dokumente/MED/Examples/perugia.graphml",c);
-        yFilesConverter conv = new yFilesConverter(0.5);
-        MEDGraph g = conv.convertToMED(graph,c);*/
+        MEDmlWriter w = new MEDmlWriter("/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop.graphml");
+        w.write(g);*/
+        MEDAnimation.MorphType morphType = MEDAnimation.MorphType.COSINE;
+        MEDmlReader r = new MEDmlReader("/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop_labelsAndGroups_largestComponent_2Core.graphml", MEDmlReader.InputType.yEdNew, 0.25);
+        r.setDataFieldID("d5");
+        MEDGraph g = r.read();
         System.out.println("Finished reading!");
-        g.normalize(100);
+        g.normalize(50);
         Scheduler s = new GreedyEdgeScheduler(speed,fullLengthTime,crossingDelay,morphType);
         s.schedule(g);
         System.out.println("Finished scheduling!");
         System.out.println("Total Time: " + (g.getLastEnd()-g.getFirstStart()));
-        MEDDrawer d = new MEDDrawer(g,"/home/foersth/Dokumente/MED/Examples/perugia2.mp4");
+        MEDDrawer d = new MEDDrawer(g,"/home/foersth/Dokumente/MED/Examples/GDContest/boardgames.mp4");
         d.setEdgeWidth(2);
-        d.setVertexRadius(8);
-        d.draw(g.getLastEnd()-g.getFirstStart(),30,(int)((g.getMaxX()-g.getMinX())),(int)(g.getMaxY()-g.getMinY()), MEDDrawer.Mode.MPEG);
-        MEDmlWriter w = new MEDmlWriter("/home/foersth/Dokumente/MED/Examples/perugia.medml");
-        w.write(g);
+        d.setVertexRadius(5);
+        d.draw(g.getLastEnd()-g.getFirstStart(),30,(int)((g.getMaxX()-g.getMinX())),(int)(g.getMaxY()-g.getMinY()), -g.getMinX(), -g.getMinY(), MEDDrawer.Mode.MPEG);
+        //MEDmlWriter w = new MEDmlWriter("/home/foersth/Dokumente/MED/Examples/GDContest/marvel.medml");
+        //w.write(g);*/
     }
 
     static IGraph load(String file,GraphComponent graphComponent)

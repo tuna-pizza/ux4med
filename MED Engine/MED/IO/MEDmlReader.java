@@ -9,6 +9,7 @@ import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.File;
 import java.io.IOException;
+
 import org.xml.sax.*;
 
 public class MEDmlReader
@@ -16,10 +17,25 @@ public class MEDmlReader
     private final String file;
     public enum InputType {MEDml, yEdOld, yEdNew};
     private InputType inputType;
-    public MEDmlReader(String file, InputType inputType)
+    private double defaultEdgeLength;
+    private String dataFieldID;
+    public MEDmlReader(String file, InputType inputType, double defaultEdgeLength)
     {
         this.file = file;
+        this.dataFieldID = "d5";
         this.inputType = inputType;
+        if (defaultEdgeLength >= 0 && defaultEdgeLength <= 1)
+        {
+            this.defaultEdgeLength = defaultEdgeLength;
+        }
+        else
+        {
+            this.defaultEdgeLength = 0.5;
+        }
+    }
+    public void setDataFieldID(String dataFieldID)
+    {
+        this.dataFieldID = dataFieldID;
     }
     public MEDGraph read()
     {
@@ -69,7 +85,7 @@ public class MEDmlReader
                 NamedNodeMap edgeAttributes = edge.getAttributes();
                 String sourceID = edgeAttributes.getNamedItem("source").getTextContent();
                 String targetID = edgeAttributes.getNamedItem("target").getTextContent();
-                double minLength = 0.5;
+                double minLength = defaultEdgeLength;
                 if (edgeAttributes.getNamedItem("minLength") != null)
                 {
                     minLength = Double.parseDouble(edgeAttributes.getNamedItem("minLength").getTextContent());
@@ -141,7 +157,7 @@ public class MEDmlReader
                             NamedNodeMap dataAttributes = data.getAttributes();
                             if (dataAttributes.getNamedItem("key") != null)
                             {
-                                if (dataAttributes.getNamedItem("key").getTextContent().equals("d6"))
+                                if (dataAttributes.getNamedItem("key").getTextContent().equals(dataFieldID))
                                 {
                                     Node yShapeNode = data.getFirstChild();
                                     while (yShapeNode != null)
@@ -178,7 +194,7 @@ public class MEDmlReader
                             NamedNodeMap dataAttributes = data.getAttributes();
                             if (dataAttributes.getNamedItem("key") != null)
                             {
-                                if (dataAttributes.getNamedItem("key").getTextContent().equals("d5"))
+                                if (dataAttributes.getNamedItem("key").getTextContent().equals(dataFieldID))
                                 {
                                     Node yShapeNode = data.getFirstChild();
                                     while (yShapeNode != null)
