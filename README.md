@@ -1,5 +1,6 @@
 # ux4med
 A project with the goal to study the user experience of Morphing Edge Drawings (MED) of graphs.
+
 Structure:
 - Examples: Contains some examples of MEDs in GIF, MP4 and MEDml (MED markup language) format.
 - MED Engine: Contains a Java package MED for creating MEDs.
