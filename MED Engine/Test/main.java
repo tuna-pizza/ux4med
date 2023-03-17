@@ -1,7 +1,6 @@
 package Test;
 
-import MED.Algorithm.GreedyEdgeScheduler;
-import MED.Algorithm.Scheduler;
+import MED.Algorithm.*;
 import MED.Engine.MEDDrawer;
 import MED.Graph.MEDGraph;
 import MED.Graph.MEDVertex;
@@ -12,9 +11,6 @@ import MED.IO.JSONReader;
 import MED.IO.MEDmlReader;
 import MED.IO.CSVReader;
 import MED.IO.MEDmlWriter;
-import com.yworks.yfiles.graph.IGraph;
-import com.yworks.yfiles.graphml.GraphMLIOHandler;
-import com.yworks.yfiles.view.GraphComponent;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,45 +19,27 @@ public class main
 {
     public static void main (String[] args)
     {
-        double speed = 0.15;
+        double speed = 0.1;
         double fullLengthTime = 100;
         double crossingDelay = 50;
+        MEDAnimation.MorphType morphType = MEDAnimation.MorphType.COSINE;
         /*CSVReader r = new CSVReader("/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop_nodes.csv","/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop_edges.csv",0.5);
         MEDGraph g = r.read();
         MEDmlWriter w = new MEDmlWriter("/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop.graphml");
         w.write(g);*/
-        MEDAnimation.MorphType morphType = MEDAnimation.MorphType.COSINE;
-        MEDmlReader r = new MEDmlReader("/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop_labelsAndGroups_largestComponent_2Core.graphml", MEDmlReader.InputType.yEdNew, 0.25);
-        r.setDataFieldID("d5");
+        MEDmlReader r = new MEDmlReader("/home/foersth/Dokumente/MED/Examples/perugia-original.medml", MEDmlReader.InputType.MEDml, 0.25);
         MEDGraph g = r.read();
         System.out.println("Finished reading!");
-        g.normalize(50);
-        Scheduler s = new GreedyEdgeScheduler(speed,fullLengthTime,crossingDelay,morphType);
-        s.schedule(g);
+        //Scheduler s = new GreedyEdgeScheduler(speed,fullLengthTime,crossingDelay,morphType);
+        //s.schedule(g);
         System.out.println("Finished scheduling!");
-        System.out.println("Total Time: " + (g.getLastEnd()-g.getFirstStart()));
-        MEDDrawer d = new MEDDrawer(g,"/home/foersth/Dokumente/MED/Examples/GDContest/boardgames.mp4");
+        //System.out.println("Total Time: " + (g.getLastEnd()-g.getFirstStart()));
+        MEDDrawer d = new MEDDrawer(g,"/home/foersth/Dokumente/MED/Examples/Variants/test.mp4");
         d.setEdgeWidth(2);
         d.setVertexRadius(5);
         d.draw(g.getLastEnd()-g.getFirstStart(),30,(int)((g.getMaxX()-g.getMinX())),(int)(g.getMaxY()-g.getMinY()), -g.getMinX(), -g.getMinY(), MEDDrawer.Mode.MPEG);
         //MEDmlWriter w = new MEDmlWriter("/home/foersth/Dokumente/MED/Examples/GDContest/marvel.medml");
         //w.write(g);*/
-    }
-
-    static IGraph load(String file,GraphComponent graphComponent)
-    {
-        try
-        {
-            File in = new File(file);
-            GraphMLIOHandler io = new GraphMLIOHandler();
-            graphComponent.setGraphMLIOHandler(io);
-            graphComponent.setFileIOEnabled(true);
-            graphComponent.importFromGraphML(in.toURI().toURL());
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return graphComponent.getGraph();
     }
     static MEDGraph example2 (String style, double speed)
     {
