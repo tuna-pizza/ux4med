@@ -10,20 +10,21 @@ import java.util.*;
 
 public class GreedyVertexScheduler extends  Scheduler
 {
-    public GreedyVertexScheduler(double speed, double fullLengthTime, double crossingDelay, MEDAnimation.MorphType morphType)
+    public GreedyVertexScheduler(double speed, double fullLengthTime, double crossingDelay, MEDAnimation.MorphType morphType, boolean duplicateEdges, boolean ignoreCrossingFreeEdges)
     {
-        super(speed,fullLengthTime,crossingDelay,morphType);
+        super(speed,fullLengthTime,crossingDelay,morphType,duplicateEdges,ignoreCrossingFreeEdges);
     }
     @Override
     public void schedule(MEDGraph g)
     {
         HashSet<MEDVertex> scheduled = new HashSet<>();
-        HashSet<MEDVertex> toBeScheduled  = new HashSet<>();
+        List<MEDVertex> toBeScheduled  = new ArrayList<>();
         Iterator<MEDVertex> v_it = g.getVertices();
         while (v_it.hasNext())
         {
             toBeScheduled.add(v_it.next());
         }
+        toBeScheduled.sort(new IncidentEdgeLengthComparator(g));
         HashMap<MEDVertex,Double> startTimes = new HashMap<>();
         double period = 0;
         while (!toBeScheduled.isEmpty())

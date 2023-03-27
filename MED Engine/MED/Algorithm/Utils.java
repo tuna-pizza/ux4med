@@ -5,7 +5,9 @@ import MED.Data.Coordinate;
 import MED.Engine.MEDEngine;
 import MED.Graph.MEDAnimation;
 import MED.Graph.MEDEdge;
+import com.yworks.yfiles.utils.ICollection;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public final class Utils
@@ -240,5 +242,29 @@ public final class Utils
         {
             return null;
         }
+    }
+
+    public static LinkedList<MEDEdge> getCrossingFreeEdges(List<MEDEdge> edges)
+    {
+        LinkedList<MEDEdge> crossingFreeEdges = new LinkedList<>();
+        for (MEDEdge e1 : edges)
+        {
+            boolean isCrossing = false;
+            for (MEDEdge e2 : edges)
+            {
+                if (!e1.equals(e2))
+                {
+                    if (Utils.computeCrossing(e1, e2) != null)
+                    {
+                        isCrossing = true;
+                    }
+                }
+            }
+            if (!isCrossing)
+            {
+                crossingFreeEdges.add(e1);
+            }
+        }
+        return crossingFreeEdges;
     }
 }

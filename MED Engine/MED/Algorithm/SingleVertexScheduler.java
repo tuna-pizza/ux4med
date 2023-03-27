@@ -14,7 +14,7 @@ public class SingleVertexScheduler extends Scheduler
 {
     public SingleVertexScheduler(double speed, double fullLengthTime, double crossingDelay, MEDAnimation.MorphType morphType)
     {
-        super(speed,fullLengthTime,crossingDelay,morphType);
+        super(speed,fullLengthTime,crossingDelay,morphType,true,false);
     }
     @Override
     public void schedule(MEDGraph g)

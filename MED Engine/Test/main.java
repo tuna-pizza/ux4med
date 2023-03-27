@@ -27,14 +27,14 @@ public class main
         MEDGraph g = r.read();
         MEDmlWriter w = new MEDmlWriter("/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop.graphml");
         w.write(g);*/
-        MEDmlReader r = new MEDmlReader("/home/foersth/Dokumente/MED/Examples/perugia-original.medml", MEDmlReader.InputType.MEDml, 0.25);
+        MEDmlReader r = new MEDmlReader("/home/foersth/Dokumente/MED/Examples/perugia.graphml", MEDmlReader.InputType.yEdNew, 0.25);
         MEDGraph g = r.read();
         System.out.println("Finished reading!");
-        //Scheduler s = new GreedyEdgeScheduler(speed,fullLengthTime,crossingDelay,morphType);
-        //s.schedule(g);
+        Scheduler s = new GreedyEdgeScheduler(speed,fullLengthTime,crossingDelay,morphType,true,true);
+        s.schedule(g);
         System.out.println("Finished scheduling!");
-        //System.out.println("Total Time: " + (g.getLastEnd()-g.getFirstStart()));
-        MEDDrawer d = new MEDDrawer(g,"/home/foersth/Dokumente/MED/Examples/Variants/test.mp4");
+        System.out.println("Total Time: " + (g.getLastEnd()-g.getFirstStart()));
+        MEDDrawer d = new MEDDrawer(g,"/home/foersth/Dokumente/MED/Examples/Variants/misue-planar.mp4");
         d.setEdgeWidth(2);
         d.setVertexRadius(5);
         d.draw(g.getLastEnd()-g.getFirstStart(),30,(int)((g.getMaxX()-g.getMinX())),(int)(g.getMaxY()-g.getMinY()), -g.getMinX(), -g.getMinY(), MEDDrawer.Mode.MPEG);

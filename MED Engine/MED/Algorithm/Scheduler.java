@@ -10,12 +10,16 @@ public abstract class Scheduler
     protected final double fullLengthTime;
     protected final double crossingDelay;
     protected final MEDAnimation.MorphType morphType;
-    public Scheduler(double speed, double fullLengthTime, double crossingDelay, MEDAnimation.MorphType morphType)
+    protected final boolean duplicateEdges;
+    protected final boolean ignoreCrossingFreeEdges;
+    public Scheduler(double speed, double fullLengthTime, double crossingDelay, MEDAnimation.MorphType morphType, boolean duplicateEdges, boolean ignoreCrossingFreeEdges)
     {
         this.speed = speed;
         this.fullLengthTime = fullLengthTime;
         this.crossingDelay = crossingDelay;
         this.morphType = morphType;
+        this.duplicateEdges = duplicateEdges;
+        this.ignoreCrossingFreeEdges = ignoreCrossingFreeEdges;
     }
     public abstract void schedule(MEDGraph g);
 }

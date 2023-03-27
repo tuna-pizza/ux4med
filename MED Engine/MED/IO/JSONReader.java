@@ -5,6 +5,7 @@ import MED.Graph.MEDAnimation;
 import MED.Graph.MEDEdge;
 import MED.Graph.MEDGraph;
 import MED.Graph.MEDVertex;
+//import package json from maven
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Document;

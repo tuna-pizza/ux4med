@@ -13,7 +13,7 @@ public class SingleEdgeScheduler extends Scheduler
 {
     public SingleEdgeScheduler(double speed, double fullLengthTime, double crossingDelay, MEDAnimation.MorphType morphType)
     {
-        super(speed,fullLengthTime,crossingDelay,morphType);
+        super(speed,fullLengthTime,crossingDelay,morphType,false,false);
     }
     @Override
     public void schedule(MEDGraph g)

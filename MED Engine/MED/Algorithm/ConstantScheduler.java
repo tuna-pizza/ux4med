@@ -10,7 +10,7 @@ public class ConstantScheduler extends Scheduler
 {
     public ConstantScheduler(MEDAnimation.MorphType morphType)
     {
-        super(100,0,0,morphType);
+        super(100,0,0,morphType,false,false);
     }
     @Override
     public void schedule(MEDGraph g)

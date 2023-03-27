@@ -9,47 +9,101 @@ import java.util.*;
 
 public class GreedyEdgeScheduler extends Scheduler
 {
-    public GreedyEdgeScheduler(double speed, double fullLengthTime, double crossingDelay, MEDAnimation.MorphType morphType)
+    private boolean edgeRepetition;
+    public GreedyEdgeScheduler(double speed, double fullLengthTime, double crossingDelay, MEDAnimation.MorphType morphType, boolean duplicateEdges, boolean ignoreCrossingFreeEdges)
     {
-        super(speed,fullLengthTime,crossingDelay,morphType);
+        super(speed,fullLengthTime,crossingDelay,morphType,duplicateEdges,ignoreCrossingFreeEdges);
     }
     @Override
     public void schedule(MEDGraph g)
     {
-        List<MEDEdge> edges = new ArrayList<>();
+        List<MEDEdge> edges_to_schedule = new ArrayList<>();
         Iterator<MEDEdge> e_it = g.getEdges();
         while (e_it.hasNext())
         {
-            edges.add(e_it.next());
+            edges_to_schedule.add(e_it.next());
         }
-        edges.sort(new StubMorphLengthComparator());
-        List<Double> startTimes = new ArrayList<>(edges.size());
-        double period = 0;
-        for (int e = 0; e < edges.size(); e++)
+        List<MEDEdge> crossingFreeEdges = new LinkedList<>();
+        if (ignoreCrossingFreeEdges)
         {
-            List<Interval> restrictedIntervals = new ArrayList<>();
-            double stubMorphLengthE = Utils.getStubMorphLength(edges.get(e));
-            double stubMorphTimeE = stubMorphLengthE/speed;
-            double fullMorphTimeE = 2*stubMorphTimeE + fullLengthTime;
-            for (int c = 0; c < e; c++)
+            crossingFreeEdges = Utils.getCrossingFreeEdges(edges_to_schedule);
+            edges_to_schedule.removeAll(crossingFreeEdges);
+        }
+        edges_to_schedule.sort(new StubMorphLengthComparator());
+        List<List<Double>> startTimes = new ArrayList<List<Double>>(edges_to_schedule.size());
+        List<MEDEdge> edges_still_to_schedule = new ArrayList<>();
+        for (int i = 0; i < edges_to_schedule.size(); i++)
+        {
+            startTimes.add(new LinkedList<Double>());
+            edges_still_to_schedule.add(edges_to_schedule.get(i));
+        }
+        double period = 0;
+        boolean firstIteration = true;
+        do
+        {
+            List<MEDEdge> finishedEdges = new LinkedList<>();
+            for (int e = 0; e < edges_to_schedule.size(); e++)
             {
-                Interval restrictedInterval = Utils.getConflictInterval(edges.get(e),edges.get(c),startTimes.get(c),speed,fullLengthTime,crossingDelay,morphType);
-                if (restrictedInterval != null)
+                List<Interval> restrictedIntervals = new ArrayList<>();
+                double stubMorphLengthE = Utils.getStubMorphLength(edges_to_schedule.get(e));
+                double stubMorphTimeE = stubMorphLengthE / speed;
+                double fullMorphTimeE = 2 * stubMorphTimeE + fullLengthTime;
+                for (int c = 0; c < edges_to_schedule.size(); c++)
                 {
-                    restrictedIntervals.add(restrictedInterval);
+                    if (c != e)
+                    {
+                        for (double startTime : startTimes.get(c))
+                        {
+                            Interval restrictedInterval = Utils.getConflictInterval(edges_to_schedule.get(e), edges_to_schedule.get(c), startTime, speed, fullLengthTime, crossingDelay, morphType);
+                            if (restrictedInterval != null)
+                            {
+                                restrictedIntervals.add(restrictedInterval);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (double startTime : startTimes.get(c))
+                        {
+                            Interval restrictedInterval = new Interval(startTime-fullMorphTimeE,startTime+fullMorphTimeE);
+                            restrictedIntervals.add(restrictedInterval);
+                        }
+                    }
+                }
+                double possibleStartTime = Utils.earliestSpace(restrictedIntervals);
+                double endTime = possibleStartTime + fullMorphTimeE;
+                if (firstIteration || (endTime < period))
+                {
+                    startTimes.get(e).add(possibleStartTime);
+                }
+                else
+                {
+                    finishedEdges.add(edges_to_schedule.get(e));
+                }
+                if (firstIteration)
+                {
+                    if (endTime > period)
+                    {
+                        period = endTime;
+                    }
                 }
             }
-            startTimes.add(e,Utils.earliestSpace(restrictedIntervals));
-            double endTime = startTimes.get(e) + fullMorphTimeE;
-            if (endTime > period)
+            firstIteration = false;
+            edges_still_to_schedule.removeAll(finishedEdges);
+        }
+        while (!edges_still_to_schedule.isEmpty() && duplicateEdges);
+        for (int i = 0; i < edges_to_schedule.size(); i++)
+        {
+            for (double startTime : startTimes.get(i))
             {
-                period = endTime;
+                MEDAnimation a = new MEDAnimation(startTime, speed, fullLengthTime, period, morphType);
+                edges_to_schedule.get(i).addAnimation(a);
             }
         }
-        for (int i = 0; i < edges.size(); i++)
+        for (MEDEdge e : crossingFreeEdges)
         {
-            MEDAnimation a = new MEDAnimation(startTimes.get(i),speed,fullLengthTime,period,morphType);
-            edges.get(i).addAnimation(a);
+            MEDAnimation a = new MEDAnimation(0,speed,fullLengthTime,period, MEDAnimation.MorphType.COMPLETE);
+            e.addAnimation(a);
         }
         g.updateTimes();
     }
