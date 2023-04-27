@@ -6,6 +6,11 @@ import MED.Engine.MEDEngine;
 import MED.Graph.MEDAnimation;
 import MED.Graph.MEDEdge;
 import com.yworks.yfiles.utils.ICollection;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.CubicCurve;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -179,6 +184,9 @@ public final class Utils
                 }
                 return (timeRatio/Math.PI)*stubMorphTime;
             }
+            case EASING:
+                double timeRatio = Utils.cubicBezierCurveAt(0.1,0.25,1,0.25,morphingRatio);
+                return timeRatio*stubMorphTime;
             default:
             {
                 return -1;
@@ -266,5 +274,14 @@ public final class Utils
             }
         }
         return crossingFreeEdges;
+    }
+
+    /**
+     * Computes the y-value of the cubic Bezier curve from (0,0) to (1,1) via control points (x1,y1) and (x2,y2) at x-coordinate x
+     */
+    static public double cubicBezierCurveAt(double x1,double y1,double x2,double y2,double x)
+    {
+        //TODO: implement this function
+        return 0.5;
     }
 }

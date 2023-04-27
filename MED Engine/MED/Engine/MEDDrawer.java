@@ -1,6 +1,7 @@
 package MED.Engine;
 
 import MED.Data.Coordinate;
+import MED.Data.Region;
 import MED.Graph.MEDGraph;
 import MED.Graph.MEDVertex;
 import MED.Graph.MEDEdge;
@@ -8,7 +9,6 @@ import MED.Graph.MEDEdge;
 //Required package, check http://www.java2s.com/Code/Java/2D-Graphics-GUI/AnimatedGifEncoder.htm
 import java2s.AnimatedGifEncoder;
 //Required package, import jcodec and jcodec.javase via maven
-import org.jcodec.common.io.ByteBufferSeekableByteChannel;
 import org.jcodec.common.model.Rational;
 import org.jcodec.common.io.NIOUtils;
 import org.jcodec.common.io.SeekableByteChannel;
@@ -19,16 +19,15 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
+import java.util.LinkedList;
 
 public class MEDDrawer
 {
     private final MEDGraph graph;
     private final MEDEngine engine;
     private final String pathToFile;
+    private final LinkedList<Region> regions;
     private int edgeWidth;
     private int vertexRadius;
     private int margin;
@@ -41,6 +40,11 @@ public class MEDDrawer
         this.edgeWidth = 2;
         this.vertexRadius = 3;
         this.margin = 25;
+        this.regions = new LinkedList<Region>();
+    }
+    public void addRegion(Region r)
+    {
+        this.regions.add(r);
     }
     public void setEdgeWidth(int edgeWidth)
     {
@@ -54,21 +58,21 @@ public class MEDDrawer
     {
         this.margin = margin;
     }
-    public boolean draw(double time, int fps, int width, int height, double xOffset, double yOffset)
+    public boolean draw(double time, int fps, int width, int height, double xOffset, double yOffset, double timeOffset)
     {
-        return draw(time,fps,width,height,xOffset,yOffset,Mode.GIF);
+        return draw(time,fps,width,height,xOffset,yOffset,timeOffset,Mode.GIF);
     }
-    public boolean draw(double time, int fps, int width, int height, double xOffset, double yOffset, Mode mode)
+    public boolean draw(double time, int fps, int width, int height, double xOffset, double yOffset, double timeOffset, Mode mode)
     {
         switch (mode)
         {
             case GIF:
             {
-                return drawGif(time, fps, width, height, xOffset, yOffset);
+                return drawGif(time, fps, width, height, xOffset, yOffset, timeOffset);
             }
             case MPEG:
             {
-                return drawMpeg(time,fps,width,height, xOffset, yOffset);
+                return drawMpeg(time,fps,width,height, xOffset, yOffset, timeOffset);
             }
             default:
             {
@@ -76,7 +80,7 @@ public class MEDDrawer
             }
         }
     }
-    private boolean drawMpeg(double time, int fps, int width, int height, double xOffset, double yOffset)
+    private boolean drawMpeg(double time, int fps, int width, int height, double xOffset, double yOffset, double timeOffset)
     {
         SeekableByteChannel out = null;
         try
@@ -85,7 +89,7 @@ public class MEDDrawer
             // for Android use: AndroidSequenceEncoder
             AWTSequenceEncoder encoder = new AWTSequenceEncoder(out, Rational.R(fps, 1));
             double frameTime = 1000.0/fps;
-            double currentFrame = 0;
+            double currentFrame = timeOffset;
             do
             {
                 BufferedImage frameImage = new BufferedImage(width+width%2+2*margin,height+height%2+2*margin,BufferedImage.TYPE_3BYTE_BGR);
@@ -93,7 +97,7 @@ public class MEDDrawer
                 encoder.encodeImage(frameImage);
                 currentFrame += frameTime;
             }
-            while(currentFrame<time);
+            while(currentFrame<timeOffset+time);
             encoder.finish();
         }
         catch (Exception e)
@@ -105,7 +109,7 @@ public class MEDDrawer
         NIOUtils.closeQuietly(out);
         return true;
     }
-    private boolean drawGif(double time, int fps, int width, int height, double xOffset, double yOffset)
+    private boolean drawGif(double time, int fps, int width, int height, double xOffset, double yOffset, double timeOffset)
     {
         AnimatedGifEncoder e = new AnimatedGifEncoder();
         if (!e.start(pathToFile))
@@ -115,7 +119,7 @@ public class MEDDrawer
         int frameTime = 1000/fps;
         e.setDelay(frameTime);
         e.setRepeat(0);
-        long currentFrame = 0;
+        long currentFrame = (long)timeOffset;
         do
         {
             BufferedImage frameImage = new BufferedImage(width+2*margin,height+2*margin,BufferedImage.TYPE_INT_RGB);
@@ -123,7 +127,7 @@ public class MEDDrawer
             e.addFrame(frameImage);
             currentFrame += frameTime;
         }
-        while(currentFrame<time);
+        while(currentFrame<time+timeOffset);
         e.finish();
         return true;
     }
@@ -135,6 +139,10 @@ public class MEDDrawer
         frameDrawing.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         BasicStroke bs = new BasicStroke(edgeWidth);
         frameDrawing.setStroke(bs);
+        for (Region r : regions)
+        {
+            drawRegion(frameDrawing, r, xOffset, yOffset);
+        }
         Iterator<MEDEdge> edge_it = graph.getEdges();
         while (edge_it.hasNext())
         {
@@ -165,10 +173,24 @@ public class MEDDrawer
     private void drawVertex(Graphics2D frameDrawing, MEDVertex v, double xOffset, double yOffset)
     {
         Point2D.Double pos = new Point2D.Double(v.getX()+margin+xOffset,v.getY()+margin+yOffset);
-        frameDrawing.setColor(Color.decode(v.getColor()));
         frameDrawing.setBackground(Color.decode(v.getColor()));
-        Ellipse2D.Double vertex = new Ellipse2D.Double(pos.getX()-vertexRadius,pos.getY()-vertexRadius,2*vertexRadius,2*vertexRadius);
-        frameDrawing.draw(vertex);
+        double size = vertexRadius;
+        /*if (!v.getColor().equals("#808080"))
+        {
+            size += 2;
+        }*/
+        Ellipse2D.Double vertex = new Ellipse2D.Double(pos.getX()-size,pos.getY()-size,2*size,2*size);
+        frameDrawing.setColor(Color.decode(v.getColor()));
         frameDrawing.fill(vertex);
+        frameDrawing.setColor(Color.decode("#000000"));
+        frameDrawing.draw(vertex);
+    }
+
+    private void drawRegion(Graphics2D frameDrawing, Region r, double xOffset, double yOffset)
+    {
+        frameDrawing.setColor(Color.decode(r.getColor()));
+        Polygon p = r.getPolygon();
+        p.translate((int)xOffset,(int)yOffset);
+        frameDrawing.fill(p);
     }
 }

@@ -149,7 +149,76 @@ public class MEDGraph
             e.clearAnimations();
         }
     }
-    public void normalize (double minVertexDistance)
+    public void normalizeToMinimumVertexDistance(double minVertexDistance)
+    {
+        double currentMinDistance = Double.MAX_VALUE;
+        for (MEDVertex v1 : vertices.values())
+        {
+            for (MEDVertex v2 : vertices.values())
+            {
+                if (v1.equals(v2))
+                {
+                    continue;
+                }
+                double distance = Utils.distance(v1.getX(), v1.getY(), v2.getX(), v2.getY());
+                if (distance < currentMinDistance)
+                {
+                    currentMinDistance = distance;
+                }
+            }
+        }
+        double scaleRatio = Math.max(1,minVertexDistance/currentMinDistance);
+        normalize(scaleRatio);
+    }
+
+    public void normalize (double scaleRatio)
+    {
+        double minimumX = Double.MAX_VALUE;
+        double minimumY = Double.MAX_VALUE;
+        for (MEDVertex v : vertices.values())
+        {
+            v.scale(scaleRatio);
+            if (v.getX() < minimumX)
+            {
+                minimumX = v.getX();
+            }
+            if (v.getY() < minimumY)
+            {
+                minimumY = v.getY();
+            }
+        }
+        minimumX=Math.min(0,minimumX);
+        minimumY=Math.min(0,minimumY);
+        for (MEDVertex v : vertices.values())
+        {
+            v.shift(-minimumX,-minimumY);
+        }
+        this.minX = Double.MAX_VALUE;
+        this.minY = Double.MAX_VALUE;
+        this.maxX = Double.MIN_VALUE;
+        this.maxY = Double.MIN_VALUE;
+        for (MEDVertex v : vertices.values())
+        {
+            if (v.getX() < this.minX)
+            {
+                this.minX = v.getX();
+            }
+            if (v.getX() > this.maxX)
+            {
+                this.maxX = v.getX();
+            }
+            if (v.getY() < this.minY)
+            {
+                this.minY = v.getY();
+            }
+            if (v.getY() > this.maxY)
+            {
+                this.maxY = v.getY();
+            }
+        }
+        updateTimes();
+    }
+    /*public void normalize (double minVertexDistance)
     {
         double currentMinDistance = Double.MAX_VALUE;
         for (MEDVertex v1 : vertices.values())
@@ -212,5 +281,5 @@ public class MEDGraph
             }
         }
         updateTimes();
-    }
+    }*/
 }

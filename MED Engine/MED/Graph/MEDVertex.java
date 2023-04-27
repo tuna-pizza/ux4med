@@ -9,7 +9,7 @@ public class MEDVertex
 
     public MEDVertex(String id,double x,double y)
     {
-        this(id,x,y,"#000000");
+        this(id,x,y,"#808080");
     }
     public MEDVertex(String id,double x,double y,String color)
     {

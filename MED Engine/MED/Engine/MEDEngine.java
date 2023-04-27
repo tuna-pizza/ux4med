@@ -3,6 +3,7 @@ package MED.Engine;
 import MED.Data.Coordinate;
 import MED.Graph.MEDAnimation;
 import MED.Graph.MEDEdge;
+import MED.Algorithm.Utils;
 
 import java.util.Iterator;
 
@@ -164,6 +165,10 @@ public class MEDEngine
             if (a.getMorphType().equals(MEDAnimation.MorphType.COSINE))
             {
                 return (1-Math.cos(linearStubExtensionLength*Math.PI))/2;
+            }
+            if (a.getMorphType().equals(MEDAnimation.MorphType.EASING))
+            {
+                return Utils.cubicBezierCurveAt(0.25,0.1,0.25,1,linearStubExtensionLength);
             }
         }
         return 0;

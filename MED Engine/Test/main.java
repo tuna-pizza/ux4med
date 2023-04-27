@@ -14,32 +14,92 @@ import MED.IO.MEDmlWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 
 public class main
 {
     public static void main (String[] args)
     {
-        double speed = 0.1;
-        double fullLengthTime = 100;
-        double crossingDelay = 50;
-        MEDAnimation.MorphType morphType = MEDAnimation.MorphType.COSINE;
+        boolean draw = true;
+        if (!draw)
+        {
+            double speed = 0.1;
+            double fullLengthTime = 100;
+            double crossingDelay = 50;
+            MEDAnimation.MorphType morphType = MEDAnimation.MorphType.LINEAR;
+            double defaultEdgeLength = 0.5;
+            double scaleRatio = 2;
+            String graphFile = "/home/foersth/Dokumente/MED/Examples/Alessandra-Examples/kpop1.json";
+            String coordinateFile = "/home/foersth/Dokumente/MED/Examples/Alessandra-Examples/kpop2.json";
+            String outputFile = "/home/foersth/Dokumente/MED/Examples/Alessandra-Examples/kpop.medml";
+            readJSONAndWriteToMEDml(graphFile, coordinateFile, outputFile, speed, fullLengthTime, crossingDelay, morphType, defaultEdgeLength, scaleRatio);
+        }
+        else
+        {
+            String inputFile = "/home/foersth/Dokumente/MED/Examples/Alessandra-Examples/Task3/boardgames.medml";
+            String outputFile = "/home/foersth/Dokumente/MED/Examples/Alessandra-Examples/Task3/boardgames.mp4";
+            double defaultEdgeLength = 0.5;
+            readMEDmlAndDraw(inputFile,outputFile,defaultEdgeLength);
+        }
+        /*JSONReader r = new JSONReader(,"/home/foersth/Dokumente/MED/Examples/Alessandra-Examples/marvel2.json",0.5);
+        MEDGraph g = r.read();
+        g.normalize(2);
+        Iterator<MEDVertex> v_it = g.getVertices();
+        while (v_it.hasNext())
+        {
+            MEDVertex v = v_it.next();
+            System.out.println(v.getID() + "\t" + v.getX() + "\t" + v.getY());
+        }
+       // Scheduler s = new GreedyEdgeScheduler(speed,fullLengthTime,crossingDelay,morphType,true,false);
+        //s.schedule(g);
+        Scheduler s = new ConstantScheduler(MEDAnimation.MorphType.PED);
+        s.schedule(g);*/
+
+        /*
+        BoardgameReader r = new BoardgameReader("/home/foersth/Dokumente/MED/Examples/GDContest/boardgames_100.json",0.5);
+        MEDGraph g = r.read();
+        MEDmlWriter w = new MEDmlWriter("/home/foersth/Dokumente/MED/Examples/GDContest/boardgames100.graphml");
+        w.write(g);
         /*CSVReader r = new CSVReader("/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop_nodes.csv","/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop_edges.csv",0.5);
         MEDGraph g = r.read();
         MEDmlWriter w = new MEDmlWriter("/home/foersth/Dokumente/MED/Examples/GDContest/2020_K-pop.graphml");
         w.write(g);*/
-        MEDmlReader r = new MEDmlReader("/home/foersth/Dokumente/MED/Examples/perugia.graphml", MEDmlReader.InputType.yEdNew, 0.25);
-        MEDGraph g = r.read();
-        System.out.println("Finished reading!");
-        Scheduler s = new GreedyEdgeScheduler(speed,fullLengthTime,crossingDelay,morphType,true,true);
-        s.schedule(g);
-        System.out.println("Finished scheduling!");
-        System.out.println("Total Time: " + (g.getLastEnd()-g.getFirstStart()));
-        MEDDrawer d = new MEDDrawer(g,"/home/foersth/Dokumente/MED/Examples/Variants/misue-planar.mp4");
-        d.setEdgeWidth(2);
-        d.setVertexRadius(5);
-        d.draw(g.getLastEnd()-g.getFirstStart(),30,(int)((g.getMaxX()-g.getMinX())),(int)(g.getMaxY()-g.getMinY()), -g.getMinX(), -g.getMinY(), MEDDrawer.Mode.MPEG);
-        //MEDmlWriter w = new MEDmlWriter("/home/foersth/Dokumente/MED/Examples/GDContest/marvel.medml");
+        //MEDmlReader r = new MEDmlReader("/home/foersth/Dokumente/MED/Examples/perugia.graphml", MEDmlReader.InputType.yEdNew, 0.25);
+        //MEDGraph g = r.read();
+//        Scheduler s = new GreedyEdgeScheduler(speed,fullLengthTime,crossingDelay,morphType,true,true);
+        //s.schedule(g);
+       // System.out.println("Finished scheduling!");
+        //System.out.println("Total Time: " + (g.getLastEnd()-g.getFirstStart()));
+        //MEDDrawer d = new MEDDrawer(g,"/home/foersth/Dokumente/MED/Examples/Variants/misue-planar.mp4");
+        //d.setEdgeWidth(2);
+        //d.setVertexRadius(5);
+//        //MEDmlWriter w = new MEDmlWriter("/home/foersth/Dokumente/MED/Examples/GDContest/marvel.medml");
         //w.write(g);*/
+    }
+    static void readMEDmlAndDraw(String inputFile, String outputFile,double defaultEdgeLength)
+    {
+        MEDmlReader r = new MEDmlReader(inputFile, MEDmlReader.InputType.MEDml,defaultEdgeLength);
+        MEDGraph g = r.read();
+        MEDDrawer d = new MEDDrawer(g,outputFile);
+        d.setEdgeWidth(2);
+        d.setVertexRadius(7);
+        d.draw(g.getLastEnd()-g.getFirstStart(),30,(int)(g.getMaxX()-g.getMinX()),(int)(g.getMaxY()-g.getMinY()),-g.getMinX(),-g.getMinY(), g.getFirstStart(),MEDDrawer.Mode.MPEG);
+    }
+    static void readJSONAndWriteToMEDml(String graphFile, String coordinateFile, String outputFile, double speed, double fullLengthTime, double crossingDelay, MEDAnimation.MorphType morphType, double defaultEdgeLength, double scaleRatio)
+    {
+        JSONReader r = new JSONReader(graphFile,coordinateFile,defaultEdgeLength);
+        MEDGraph g = r.read();
+        g.normalize(scaleRatio);
+        Iterator<MEDVertex> v_it = g.getVertices();
+        while (v_it.hasNext())
+        {
+            MEDVertex v = v_it.next();
+            System.out.println(v.getID() + "\t" + v.getX() + "\t" + v.getY());
+        }
+        Scheduler s = new GreedyEdgeScheduler(speed,fullLengthTime,crossingDelay,morphType,true,false);
+        s.schedule(g);
+        MEDmlWriter w = new MEDmlWriter(outputFile);
+        w.write(g);
     }
     static MEDGraph example2 (String style, double speed)
     {

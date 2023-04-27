@@ -1,5 +1,6 @@
 package MED.IO;
 
+import MED.Data.Region;
 import MED.Graph.MEDGraph;
 import MED.Graph.MEDAnimation;
 import MED.Graph.MEDEdge;
@@ -9,6 +10,10 @@ import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Iterator;
 
 import org.xml.sax.*;
 
@@ -19,6 +24,7 @@ public class MEDmlReader
     private InputType inputType;
     private double defaultEdgeLength;
     private String dataFieldID;
+    private LinkedList<Region> regions;
     public MEDmlReader(String file, InputType inputType, double defaultEdgeLength)
     {
         this.file = file;
@@ -65,8 +71,8 @@ public class MEDmlReader
             {
                 readVertices(graph, g);
                 readEdges(graph, g);
+                readRegions(graph,g);
             }
-
         }
         catch (ParserConfigurationException | SAXException | IOException ex)
         {
@@ -74,7 +80,57 @@ public class MEDmlReader
         }
         return g;
     }
+    public List<Region> getRegions()
+    {
+        return regions;
+    }
 
+    private void readRegions(Node graph, MEDGraph g)
+    {
+        this.regions = null;
+        Node region = graph.getFirstChild();
+        while (region != null)
+        {
+            if (region.getNodeName().equals("region"))
+            {
+                ArrayList<Integer> xCoords = new ArrayList<>();
+                ArrayList<Integer> yCoords = new ArrayList<>();
+                String color = "#AFFE07";
+                NamedNodeMap regionAttributes = region.getAttributes();
+                if (regionAttributes.getNamedItem("color") != null)
+                {
+                    color = regionAttributes.getNamedItem("color").getTextContent();
+                }
+                Node point = region.getFirstChild();
+                while (point != null)
+                {
+                    if (point.getNodeName().equals("point"))
+                    {
+                        NamedNodeMap pointAttributes = point.getAttributes();
+                        int x = 0;
+                        int y = 0;
+                        if (pointAttributes.getNamedItem("x") != null)
+                        {
+                            x = (int)Double.parseDouble(pointAttributes.getNamedItem("x").getTextContent());
+                        }
+                        if (pointAttributes.getNamedItem("y") != null)
+                        {
+                            y = (int)Double.parseDouble(pointAttributes.getNamedItem("y").getTextContent());
+                        }
+                        xCoords.add(x);
+                        yCoords.add(y);
+                    }
+                    point = point.getNextSibling();
+                }
+                if (regions.equals(null))
+                {
+                    regions = new LinkedList<>();
+                }
+                regions.add(new Region(xCoords,yCoords,color));
+            }
+            region = region.getNextSibling();
+        }
+    }
     private void readEdges(Node graph, MEDGraph g)
     {
         Node edge = graph.getFirstChild();
@@ -237,7 +293,12 @@ public class MEDmlReader
                 {
                     y = 0;
                 }
-                g.addVertex(new MEDVertex(id, x, y));
+                String color = "#808080";
+                if (vertexAttributes.getNamedItem("color") != null)
+                {
+                    color = vertexAttributes.getNamedItem("color").getTextContent();
+                }
+                g.addVertex(new MEDVertex(id, x, y, color));
             }
             vertex = vertex.getNextSibling();
         }

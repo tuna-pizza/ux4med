@@ -2,7 +2,7 @@ package MED.Graph;
 
 public class MEDAnimation
 {
-    public enum MorphType{COMPLETE, PED, LINEAR, SINE, INVERSESINE, COSINE, NONE}
+    public enum MorphType{COMPLETE, PED, LINEAR, SINE, INVERSESINE, COSINE, EASING, NONE}
     private double start_time;
     private double speed;
     private double fullLengthTime;
