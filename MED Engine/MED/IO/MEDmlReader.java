@@ -122,7 +122,7 @@ public class MEDmlReader
                     }
                     point = point.getNextSibling();
                 }
-                if (regions.equals(null))
+                if (regions == null)
                 {
                     regions = new LinkedList<>();
                 }
