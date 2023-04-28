@@ -1,6 +1,7 @@
 package Test;
 
 import MED.Algorithm.*;
+import MED.Data.Region;
 import MED.Engine.MEDDrawer;
 import MED.Graph.MEDGraph;
 import MED.Graph.MEDVertex;
@@ -36,8 +37,8 @@ public class main
         }
         else
         {
-            String inputFile = "/home/foersth/Dokumente/MED/Examples/Alessandra-Examples/Task3/boardgames.medml";
-            String outputFile = "/home/foersth/Dokumente/MED/Examples/Alessandra-Examples/Task3/boardgames.mp4";
+            String inputFile = "/home/foersth/Dokumente/MED/Examples/Alessandra-Examples/Task1/kpop.medml";
+            String outputFile = "/home/foersth/Dokumente/MED/Examples/Alessandra-Examples/Task1/kpop.mp4";
             double defaultEdgeLength = 0.5;
             readMEDmlAndDraw(inputFile,outputFile,defaultEdgeLength);
         }
@@ -81,6 +82,13 @@ public class main
         MEDmlReader r = new MEDmlReader(inputFile, MEDmlReader.InputType.MEDml,defaultEdgeLength);
         MEDGraph g = r.read();
         MEDDrawer d = new MEDDrawer(g,outputFile);
+        if (r.getRegions() != null)
+        {
+            for (Region reg : r.getRegions())
+            {
+                d.addRegion(reg);
+            }
+        }
         d.setEdgeWidth(2);
         d.setVertexRadius(7);
         d.draw(g.getLastEnd()-g.getFirstStart(),30,(int)(g.getMaxX()-g.getMinX()),(int)(g.getMaxY()-g.getMinY()),-g.getMinX(),-g.getMinY(), g.getFirstStart(),MEDDrawer.Mode.MPEG);
