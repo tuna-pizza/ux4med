@@ -106,6 +106,11 @@ public class MEDmlWriter
                             animation.setAttribute("morphType","COSINE");
                             break;
                         }
+                        case EASING:
+                        {
+                            animation.setAttribute("morphType","EASING");
+                            break;
+                        }
                         default:
                         {
                             animation.setAttribute("morphType","N/A");

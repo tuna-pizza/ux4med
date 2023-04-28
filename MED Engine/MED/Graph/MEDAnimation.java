@@ -53,6 +53,11 @@ public class MEDAnimation
                 this.morphType = MorphType.COSINE;
                 break;
             }
+            case "EASING":
+            {
+                this.morphType = MorphType.EASING;
+                break;
+            }
             default:
             {
                 this.morphType = MorphType.NONE;
