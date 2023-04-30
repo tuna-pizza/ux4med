@@ -59,19 +59,23 @@
         <node id="41" x="852.6615324964979" y="377.3871005995607"/>
         <node id="42" x="1695.4893925162046" y="269.39125273032136"/>
         <node id="43" x="1293.1998170912054" y="557.1019845365882"/>
-		<region color="#04B2E6">
-        	<point x="1360" y ="705"/>
-        	<point x="1490" y="550" />
-        	<point x="1915" y="560" />
-        	<point x="1915" y="1000" />
-        	<point x="1375" y="1000" />
+		<region color="#81e0fd">
+        	<point x="1325" y ="680"/>
+        	<point x="1465" y="525" />
+        	<point x="1660" y="525" />
+			<point x="1885" y="665"/>
+			<point x="1880" y="745"/>	
+			<point x="1475" y="980"/>
+			<point x="1377" y="880"/>
         </region>
-        <region  color="#FC6F2D">
-        	<point x="1065" y ="502" />
-        	<point x="770" y ="535" />
-        	<point x="770" y ="140" />
-        	<point x="1505" y ="140" />
-        	<point x="1305" y ="370" />
+        <region  color="#fda981">
+        	<point x="1050" y ="485" />
+			<point x="930" y="495"/>
+			<point x="750" y="390"/>
+			<point x="975" y="120"/>
+			<point x="1380" y="225"/>
+			<point x="1380" y="235"/>
+        	<point x="1275" y ="350" />
         </region>
         <edge id="E0" minLength="0.5" source="41" target="44">
             <animation fullLengthTime="100.0" morphType="LINEAR" period="4920.317756776547" speed="0.1" startTime="2423.3219399862364"/>

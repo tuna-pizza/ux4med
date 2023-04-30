@@ -46,8 +46,10 @@ public class CSVReader
             String nodeLine;
             while ((nodeLine = nodeReader.readLine()) != null)
             {
-                String[] nodeData = nodeLine.split(",");
-                if (!nodeData[0].equals("id") && (nodeData[1].equals("label") || nodeData[1].equals("group")))
+                String[] nodeData = nodeLine.split(";");
+                System.out.println(nodeLine);
+                //if (!nodeData[0].equals("id") && (nodeData[1].equals("label") || nodeData[1].equals("group")))
+                if (!nodeData[0].equals("id"))
                 {
                     String id = nodeData[0];
                     MEDVertex v = new MEDVertex(id,0,0);
@@ -60,7 +62,7 @@ public class CSVReader
             String edgeLine;
             while ((edgeLine = edgeReader.readLine()) != null)
             {
-                String[] edgeData = edgeLine.split(",");
+                String[] edgeData = edgeLine.split(";");
                 if (!edgeData[0].equals("source"))
                 {
                     String source = edgeData[0];

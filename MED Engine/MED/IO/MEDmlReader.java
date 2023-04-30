@@ -141,6 +141,11 @@ public class MEDmlReader
                 NamedNodeMap edgeAttributes = edge.getAttributes();
                 String sourceID = edgeAttributes.getNamedItem("source").getTextContent();
                 String targetID = edgeAttributes.getNamedItem("target").getTextContent();
+                String color = "#000000";
+                if (edgeAttributes.getNamedItem("color") != null)
+                {
+                    color = edgeAttributes.getNamedItem("color").getTextContent();
+                }
                 double minLength = defaultEdgeLength;
                 if (edgeAttributes.getNamedItem("minLength") != null)
                 {
@@ -150,7 +155,7 @@ public class MEDmlReader
                 MEDVertex v2 = g.getVertex(targetID);
                 if (v1 != null && v2 != null)
                 {
-                    MEDEdge e = new MEDEdge(v1,v2,minLength);
+                    MEDEdge e = new MEDEdge(v1,v2,minLength,color);
                     Node animation = edge.getFirstChild();
                     while (animation != null)
                     {

@@ -158,7 +158,7 @@ public class MEDDrawer
     }
     private void drawEdge(Graphics2D frameDrawing, MEDEdge e, double xOffset, double yOffset, long currentFrame)
     {
-        frameDrawing.setColor(Color.BLACK);
+        frameDrawing.setColor(Color.decode(e.getColor()));
         Point2D.Double v1 = new Point2D.Double(e.getV1().getX()+margin+xOffset,e.getV1().getY()+margin+yOffset);
         Coordinate stubPosition1 = engine.computeStubPosition1(e,currentFrame);
         Point2D.Double stubEnd1 = new Point2D.Double(stubPosition1.getX()+margin+xOffset,stubPosition1.getY()+margin+yOffset);
@@ -190,7 +190,7 @@ public class MEDDrawer
     {
         frameDrawing.setColor(Color.decode(r.getColor()));
         Polygon p = r.getPolygon();
-        p.translate((int)xOffset,(int)yOffset);
+        p.translate((int)xOffset+margin,(int)yOffset+margin);
         frameDrawing.fill(p);
     }
 }

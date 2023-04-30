@@ -5,11 +5,6 @@ import MED.Data.Coordinate;
 import MED.Engine.MEDEngine;
 import MED.Graph.MEDAnimation;
 import MED.Graph.MEDEdge;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.CubicCurve;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
 
 import java.util.LinkedList;
 import java.util.List;
