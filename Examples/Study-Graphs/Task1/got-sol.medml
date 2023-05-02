@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+    <graph edgedefault="undirected" id="G">
+        <node id="n0" x="478.0" y="760.0"/>
+        <node id="n1" x="478.0" y="912.0"/>
+        <node id="n2" x="306.0" y="140.0"/>
+        <node id="n3" x="524.0" y="0.0"/>
+        <node id="n4" x="636.0" y="38.0"/>
+        <node id="n5" x="226.0" y="462.0"/>
+        <node id="n6" x="0.0" y="260.0"/>
+        <node id="n7" x="150.0" y="258.0"/>
+        <node id="n8" x="522.0" y="178.0"/>
+        <node id="n9" x="488.0" y="602.0"/>
+        <node id="n10" x="606.0" y="534.0"/>
+        <node id="n12" x="412.0" y="184.0"/>
+        <node id="n11" x="492.0" y="428.0"/>
+        <node id="n14" x="196.0" y="360.0"/>
+        <node id="n13" x="374.0" y="398.0"/>
+        <node id="n16" x="1016.0" y="200.0"/>
+        <node id="n15" x="768.0" y="38.0"/>
+        <node id="n18" x="204.0" y="156.0"/>
+        <node id="n17" x="866.0" y="212.0"/>
+        <node id="n19" x="328.0" y="500.0"/>
+        <node id="n21" x="700.0" y="254.0"/>
+        <node id="n20" x="670.0" y="152.0"  color="#04B2E6"/>
+        <node id="n23" x="340.0" y="290.0"/>
+        <node id="n22" x="598.0" y="310.0"/>
+        <node id="n25" x="760.0" y="362.0"  color="#04B2E6"/>
+        <node id="n24" x="414.0" y="44.0"/>
+        <edge id="E0" minLength="0.5" source="n18" target="n23">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E1" minLength="0.5" source="n20" target="n25" color="#AF00FA">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E2" minLength="0.5" source="n15" target="n20">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="851.6648189186453"/>
+        </edge>
+        <edge id="E3" minLength="0.5" source="n22" target="n25">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E4" minLength="0.5" source="n7" target="n23">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E5" minLength="0.5" source="n11" target="n10">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E6" minLength="0.5" source="n13" target="n23">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="666.1271941887264"/>
+        </edge>
+        <edge id="E7" minLength="0.5" source="n9" target="n10">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="780.9552114493287"/>
+        </edge>
+        <edge id="E8" minLength="0.5" source="n3" target="n8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E9" minLength="0.5" source="n22" target="n8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="861.5773105863908"/>
+        </edge>
+        <edge id="E10" minLength="0.5" source="n24" target="n8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E11" minLength="0.5" source="n17" target="n21">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E12" minLength="0.5" source="n11" target="n23">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E13" minLength="0.5" source="n1" target="n0">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="860.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E14" minLength="0.5" source="n16" target="n17">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="852.3961722390671"/>
+        </edge>
+        <edge id="E15" minLength="0.5" source="n8" target="n23">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E16" minLength="0.5" source="n20" target="n8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="851.3321502504734"/>
+        </edge>
+        <edge id="E17" minLength="0.5" source="n21" target="n20">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="631.6013544000805"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E18" minLength="0.5" source="n12" target="n23">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="740.7027391856539"/>
+        </edge>
+        <edge id="E19" minLength="0.5" source="n2" target="n23">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="869.0253571892151"/>
+        </edge>
+        <edge id="E20" minLength="0.5" source="n12" target="n8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="650.8175741568164"/>
+        </edge>
+        <edge id="E21" minLength="0.5" source="n15" target="n4">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="760.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E22" minLength="0.5" source="n22" target="n20">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="519.0087923046935"/>
+        </edge>
+        <edge id="E23" minLength="0.5" source="n11" target="n22">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E24" minLength="0.5" source="n0" target="n9">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E25" minLength="0.5" source="n18" target="n2">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="616.2363799656123"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E26" minLength="0.5" source="n21" target="n8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E27" minLength="0.5" source="n5" target="n13">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="838.6701024098044"/>
+        </edge>
+        <edge id="E28" minLength="0.5" source="n14" target="n23">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E29" minLength="0.5" source="n19" target="n23">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E30" minLength="0.5" source="n7" target="n6">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="850.0666637039669"/>
+        </edge>
+        <edge id="E31" minLength="0.5" source="n11" target="n9">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E32" minLength="0.5" source="n4" target="n8">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E33" minLength="0.5" source="n5" target="n23">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+        <edge id="E34" minLength="0.5" source="n22" target="n21">
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="681.8075283115542"/>
+            <animation fullLengthTime="100.0" morphType="LINEAR" period="1744.8958772396593" speed="0.1" startTime="0.0"/>
+        </edge>
+    </graph>
+</graphml>
