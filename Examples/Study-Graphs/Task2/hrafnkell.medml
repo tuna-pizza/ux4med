@@ -11,10 +11,10 @@
         <node id="n7" x="450.0" y="492.0" color="#FC6F2D"/>
         <node id="n8" x="370.0" y="284.0" color="#04B2E6"/>
         <node id="n9" x="374.0" y="80.0"/>
-        <node id="n10" x="342.0" y="494.0" color="#04B2E6"/>
+        <node id="n10" x="342.0" y="494.0" />
         <node id="n12" x="486.0" y="28.0"/>
         <node id="n11" x="530.0" y="170.0" color="#04B2E6"/>
-        <node id="n14" x="240.0" y="498.0"/>
+        <node id="n14" x="240.0" y="498.0" color="#04B2E6"/>
         <node id="n13" x="0.0" y="270.0"/>
         <node id="n16" x="282.0" y="626.0" color="#04B2E6"/>
         <node id="n15" x="134.0" y="532.0"/>
